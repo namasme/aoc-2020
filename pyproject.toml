@@ -6,7 +6,7 @@ authors = ["Nacho Mas <mesai@amazon.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-pytest-subtests = "^0.2.1"
+pytest-subtests = ">=0.3.2"
 
 [tool.poetry.dev-dependencies]
 pytest = ">=4.4.0"
