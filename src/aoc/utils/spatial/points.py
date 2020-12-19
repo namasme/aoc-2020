@@ -1,4 +1,5 @@
 from functools import total_ordering
+from itertools import product
 
 from .enums import Direction
 
@@ -90,5 +91,58 @@ class Point2D(object):
 
     def __str__(self):
         return '(x = {}, y = {})'.format(self.x, self.y)
+
+    __repr__ = __str__
+
+
+class Point3D:
+    def __init__(self, x, y, z):
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def distance_to(self, other):
+        return abs(self - other)
+
+    def moore_neighbours(self):
+        deltas = [-1, 0, 1]
+
+        return (
+            self + Point3D(x, y, z)
+            for x, y, z in product(deltas, repeat=3)
+            if x != 0 or y != 0 or z != 0
+        )
+
+    def __abs__(self):
+        return abs(self.x) + abs(self.y) + abs(self.z)
+
+    def __add__(self, other):
+        return Point3D(self.x + other.x, self.y + other.y, self.z + other.z)
+
+    def __iadd__(self, other):
+        self = self + other
+        return self
+
+    def __sub__(self, other):
+        return Point3D(self.x - other.x, self.y - other.y, self.z - other.z)
+
+    def __isub__(self, other):
+        self = self - other
+        return self
+
+    def __rmul__(self, scale):
+        return Point3D(scale * self.x, scale * self.y, scale * self.z)
+
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y and self.z == other.z
+
+    def __hash__(self):
+        return hash((self.x, self.y, self.z))
+
+    def __le__(self, other):
+        return (self.x, self.y, self.z) < (other.x, other.y, other.z)
+
+    def __str__(self):
+        return '(x = {}, y = {}, z = {})'.format(self.x, self.y, self.z)
 
     __repr__ = __str__
