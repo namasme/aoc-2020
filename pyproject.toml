@@ -2,7 +2,7 @@
 name = "aoc"
 version = "0.1.0"
 description = ""
-authors = ["Nacho Mas <mesai@amazon.com>"]
+authors = ["Nacho Mas <ignaciomasmesa@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
